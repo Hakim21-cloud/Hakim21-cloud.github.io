@@ -12,7 +12,7 @@ sensor_data = {
 
 @app.route('/')
 def main_menu():
-    return render_template('index.html')  # Load the main menu HTML
+    return render_template('index.html')
 
 @app.route('/get-data', methods=['GET'])
 def get_data():

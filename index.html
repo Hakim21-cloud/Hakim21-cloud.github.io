@@ -13,20 +13,22 @@
     </header>
 
     <main>
+        <!-- Main Menu -->
         <section id="main-menu">
             <h2>Main Menu</h2>
             <ul>
-                <li><button id="waterValve">Water Valve Control</button></li>
-                <li><button id="waterFlow">Water Flow Sensor</button></li>
-                <li><button id="waterLevel">Water Level Sensor</button></li>
-                <li><button id="phLevel">pH Level</button></li>
+                <li><button onclick="showWaterValve()">Water Valve Control</button></li>
+                <li><button onclick="showWaterFlow()">Water Flow Sensor</button></li>
+                <li><button onclick="showWaterLevel()">Water Level Sensor</button></li>
+                <li><button onclick="showPhLevel()">pH Level</button></li>
             </ul>
         </section>
 
-        <section id="output" style="display: none;">
+        <!-- Dynamic Content Section -->
+        <section id="output-section" style="display: none;">
             <h2 id="section-title"></h2>
-            <div id="output-content"></div>
-            <button id="backToMenu">Back to Menu</button>
+            <div id="content-area"></div>
+            <button id="back-button" onclick="showMainMenu()">Back to Menu</button>
         </section>
     </main>
 

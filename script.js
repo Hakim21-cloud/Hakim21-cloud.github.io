@@ -1,57 +1,86 @@
-// Element references
-const outputSection = document.getElementById('output');
-const mainMenuSection = document.getElementById('main-menu');
-const outputContent = document.getElementById('output-content');
-const backToMenuButton = document.getElementById('backToMenu');
+const mainMenu = document.getElementById('main-menu');
+const outputSection = document.getElementById('output-section');
+const contentArea = document.getElementById('content-area');
 const sectionTitle = document.getElementById('section-title');
 
 // Show main menu
 function showMainMenu() {
-    mainMenuSection.style.display = 'block';
+    mainMenu.style.display = 'block';
     outputSection.style.display = 'none';
 }
 
-// Show output section
-function showOutput(title, content) {
-    sectionTitle.innerText = title;
-    mainMenuSection.style.display = 'none';
+// Show specific section
+function showSection(title, content) {
+    sectionTitle.textContent = title;
+    contentArea.innerHTML = content;
+    mainMenu.style.display = 'none';
     outputSection.style.display = 'block';
-    outputContent.innerHTML = content;
 }
 
-// Fetch and display sensor data
-function fetchSensorData(endpoint) {
-    fetch('/get-data')
+// Fetch sensor data and display charts
+function fetchSensorData() {
+    return fetch('/get-data').then(response => response.json());
+}
+
+// Show Water Valve Control
+function showWaterValve() {
+    const content = `
+        <h3>Water Valve Control</h3>
+        <button onclick="controlValve('open')">Open Valve</button>
+        <button onclick="controlValve('close')">Close Valve</button>
+    `;
+    showSection('Water Valve Control', content);
+}
+
+// Control Valve
+function controlValve(action) {
+    fetch('/control-valve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: action })
+    })
         .then(response => response.json())
         .then(data => {
-            if (endpoint === 'waterFlow') {
-                const waterFlowContent = `
-                    <h3>Water Flow Sensor</h3>
-                    <canvas id="waterFlowChart"></canvas>
-                    <p>Estimated Water Bill: $${data.waterBill.toFixed(2)}</p>
-                `;
-                showOutput('Water Flow Sensor', waterFlowContent);
-                drawChart('waterFlowChart', 'Water Flow (L/min)', data.waterFlow);
-            } else if (endpoint === 'waterLevel') {
-                const waterLevelContent = `
-                    <h3>Water Level Sensor</h3>
-                    <canvas id="waterLevelChart"></canvas>
-                    <p>Water Levels: ${data.waterLevel.join('% and ')}%</p>
-                `;
-                showOutput('Water Level Sensor', waterLevelContent);
-                drawChart('waterLevelChart', 'Water Level (%)', data.waterLevel);
-            } else if (endpoint === 'phLevel') {
-                const phContent = `
-                    <h3>pH Level</h3>
-                    <canvas id="pHChart"></canvas>
-                `;
-                showOutput('pH Level', phContent);
-                drawChart('pHChart', 'pH Levels', data.pHLevel);
-            }
+            alert(data.status);
         });
 }
 
-// Draw chart
+// Show Water Flow Sensor Data
+function showWaterFlow() {
+    fetchSensorData().then(data => {
+        const content = `
+            <canvas id="waterFlowChart"></canvas>
+            <p>Estimated Water Bill: $${data.waterBill.toFixed(2)}</p>
+        `;
+        showSection('Water Flow Sensor', content);
+        drawChart('waterFlowChart', 'Water Flow (L/min)', data.waterFlow);
+    });
+}
+
+// Show Water Level Sensor Data
+function showWaterLevel() {
+    fetchSensorData().then(data => {
+        const content = `
+            <canvas id="waterLevelChart"></canvas>
+            <p>Water Levels: ${data.waterLevel.join('% and ')}%</p>
+        `;
+        showSection('Water Level Sensor', content);
+        drawChart('waterLevelChart', 'Water Level (%)', data.waterLevel);
+    });
+}
+
+// Show pH Level Data
+function showPhLevel() {
+    fetchSensorData().then(data => {
+        const content = `
+            <canvas id="pHChart"></canvas>
+        `;
+        showSection('pH Level', content);
+        drawChart('pHChart', 'pH Levels', data.pHLevel);
+    });
+}
+
+// Draw Chart
 function drawChart(canvasId, label, data) {
     const ctx = document.getElementById(canvasId).getContext('2d');
     new Chart(ctx, {
@@ -69,32 +98,5 @@ function drawChart(canvasId, label, data) {
     });
 }
 
-// Control water valve
-function controlValve(action) {
-    fetch('/control-valve', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: action })
-    })
-        .then(response => response.json())
-        .then(data => {
-            showOutput('Water Valve Control', `<p>${data.status}</p>`);
-        });
-}
-
-// Add event listeners
-document.getElementById('waterValve').addEventListener('click', () => {
-    const valveContent = `
-        <h3>Control Water Valve</h3>
-        <button onclick="controlValve('open')">Open Valve</button>
-        <button onclick="controlValve('close')">Close Valve</button>
-    `;
-    showOutput('Water Valve Control', valveContent);
-});
-document.getElementById('waterFlow').addEventListener('click', () => fetchSensorData('waterFlow'));
-document.getElementById('waterLevel').addEventListener('click', () => fetchSensorData('waterLevel'));
-document.getElementById('phLevel').addEventListener('click', () => fetchSensorData('phLevel'));
-backToMenuButton.addEventListener('click', showMainMenu);
-
-// Show the main menu initially
+// Initialize with main menu
 showMainMenu();
