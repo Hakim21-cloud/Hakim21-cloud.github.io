@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Water Conservation Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Water Monitoring System</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/Chart.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Smart Water Conservation Dashboard</h1>
+        <h1>Smart Water Monitoring System</h1>
     </header>
     <main>
         <section>
-            <h2>Water Flow Sensor</h2>
-            <canvas id="waterFlowChart"></canvas>
-            <p>Estimated Water Bill: $<span id="waterBill"></span></p>
-            <p>Water Usage: <span id="waterFlowPercentage"></span>%</p>
+            <h2>Water Flow Sensors</h2>
+            <div>
+                <canvas id="flowChart"></canvas>
+                <p id="flowDetails"></p>
+            </div>
         </section>
         <section>
-            <h2>Water Level Sensor</h2>
-            <canvas id="waterLevelChart"></canvas>
-            <p>Water Levels: <span id="waterLevelPercentage"></span>%</p>
+            <h2>Water Level Sensors</h2>
+            <div>
+                <canvas id="levelChart"></canvas>
+                <p id="levelDetails"></p>
+            </div>
         </section>
         <section>
-            <h2>pH Levels</h2>
-            <canvas id="phLevelChart"></canvas>
+            <h2>pH Level</h2>
+            <div>
+                <canvas id="phChart"></canvas>
+            </div>
         </section>
     </main>
     <footer>
-        <p>© 2024 Smart Water Conservation System</p>
+        <p>© 2024 Smart Water Monitoring</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="static/script.js"></script>
 </body>
 </html>
