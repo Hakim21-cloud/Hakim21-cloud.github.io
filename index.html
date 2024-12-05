@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Water Conservation</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Smart Water Conservation Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Smart Water Conservation System</h1>
+        <h1>Smart Water Conservation Dashboard</h1>
     </header>
-
     <main>
-        <section id="main-menu">
-            <h2>Main Menu</h2>
-            <ul>
-                <li><button id="waterValve">Water Valve Control</button></li>
-                <li><button id="waterFlow">Water Flow Sensor</button></li>
-                <li><button id="waterLevel">Water Level Sensor</button></li>
-                <li><button id="phLevel">pH Level</button></li>
-            </ul>
+        <section>
+            <h2>Water Flow Sensor</h2>
+            <canvas id="waterFlowChart"></canvas>
+            <p>Estimated Water Bill: $<span id="waterBill"></span></p>
+            <p>Water Usage: <span id="waterFlowPercentage"></span>%</p>
         </section>
-
-        <section id="output" style="display: none;">
-            <h2 id="section-title"></h2>
-            <div id="output-content"></div>
-            <button id="backToMenu">Back to Menu</button>
+        <section>
+            <h2>Water Level Sensor</h2>
+            <canvas id="waterLevelChart"></canvas>
+            <p>Water Levels: <span id="waterLevelPercentage"></span>%</p>
+        </section>
+        <section>
+            <h2>pH Levels</h2>
+            <canvas id="phLevelChart"></canvas>
         </section>
     </main>
-
     <footer>
         <p>© 2024 Smart Water Conservation System</p>
     </footer>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="script.js"></script>
 </body>
 </html>
