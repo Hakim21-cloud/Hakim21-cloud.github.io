@@ -1,22 +1,32 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
 # Simulated data
 sensor_data = {
-    "flow": [10, 20, 15, 25],   # Water flow sensors in L/min
-    "level": [60, 70],          # Water level sensors in percentage
-    "pH": [7.2, 7.4, 6.8, 7.1], # pH readings
-    "bill": 250.75              # Example water bill
+    "waterFlow": [5, 10, 7, 12],  # In liters/min
+    "waterLevel": [50, 60],       # Percentage
+    "pHLevel": [7.0, 7.2, 6.8, 7.1],  # pH readings
+    "waterBill": 120.75  # Example bill amount
 }
 
 @app.route('/')
-def index():
-    return render_template('layout.html')  # Layout for dynamic pages
+def main_menu():
+    return render_template('index.html')  # Load the main menu HTML
 
-@app.route('/data')
+@app.route('/get-data', methods=['GET'])
 def get_data():
     return jsonify(sensor_data)
+
+@app.route('/control-valve', methods=['POST'])
+def control_valve():
+    action = request.json.get('action')
+    if action == "open":
+        return jsonify({"status": "Valve Opened"})
+    elif action == "close":
+        return jsonify({"status": "Valve Closed"})
+    else:
+        return jsonify({"status": "Invalid Action"}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
