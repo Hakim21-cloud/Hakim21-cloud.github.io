@@ -15,4 +15,3 @@ This project is a simple web application to monitor water conservation metrics, 
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/iot-water-dashboard.git
-
