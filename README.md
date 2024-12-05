@@ -1,52 +1,37 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-}
-header {
-    background-color: #007BFF;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-nav li {
-    margin: 0 15px;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-}
-section {
-    padding: 20px;
-    margin: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.chart-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-}
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-button#openValve {
-    background-color: #28a745;
-    color: white;
-}
-button#closeValve {
-    background-color: #dc3545;
-    color: white;
-}
+// Water Flow Chart
+const waterFlowCtx = document.getElementById('waterFlowChart').getContext('2d');
+const waterFlowChart = new Chart(waterFlowCtx, {
+    type: 'line',
+    data: {
+        labels: ['0', '10', '20', '30'], // Replace with time or intervals
+        datasets: [{
+            label: 'Water Flow (L/min)',
+            data: [5, 10, 7, 12], // Replace with dynamic data
+            borderColor: 'blue',
+            borderWidth: 2,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+// pH Level Chart
+const pHCtx = document.getElementById('pHChart').getContext('2d');
+const pHChart = new Chart(pHCtx, {
+    type: 'line',
+    data: {
+        labels: ['0', '10', '20', '30'], // Replace with time or intervals
+        datasets: [{
+            label: 'pH Level',
+            data: [7, 7.2, 6.8, 7.1], // Replace with dynamic data
+            borderColor: 'green',
+            borderWidth: 2,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
