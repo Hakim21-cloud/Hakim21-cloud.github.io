@@ -1,8 +1,10 @@
-iot-water-dashboard/
-├── app.py            # Flask application
-├── templates/
-│   └── index.html    # Main menu and dynamic sections
+water-monitor-app/
+├── index.html         # Main HTML file (entry point)
+├── app.py             # Backend (Flask app)
 ├── static/
-│   ├── styles.css    # CSS for styling
-│   └── script.js     # JavaScript for functionality
-└── requirements.txt   # Python dependencies
+│   ├── styles.css     # Styling
+│   ├── script.js      # JavaScript functionality
+│   └── Chart.min.js   # Chart.js library
+├── templates/
+│   └── layout.html    # Base HTML layout (if needed for backend templating)
+└── requirements.txt    # Python dependencies
