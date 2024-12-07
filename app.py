@@ -1,32 +1,31 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify
+import random
 
 app = Flask(__name__)
 
 # Simulated data
-sensor_data = {
-    "waterFlow": [5, 10, 7, 12],  # In liters/min
-    "waterLevel": [50, 60],       # Percentage
-    "pHLevel": [7.0, 7.2, 6.8, 7.1],  # pH readings
-    "waterBill": 120.75  # Example bill amount
-}
+def get_simulated_data():
+    return {
+        "waterFlow": [
+            random.uniform(1.0, 15.0) for _ in range(4)
+        ],  # In liters/min for 4 sensors
+        "waterLevel": [
+            random.uniform(40, 100) for _ in range(2)
+        ],  # Percentage for 2 sensors
+        "pHLevel": [
+            random.uniform(6.5, 8.0)
+        ],  # pH level
+        "waterBill": round(random.uniform(50, 200), 2),  # Estimated bill
+    }
 
 @app.route('/')
-def main_menu():
+def index():
     return render_template('index.html')
 
-@app.route('/get-data', methods=['GET'])
-def get_data():
-    return jsonify(sensor_data)
-
-@app.route('/control-valve', methods=['POST'])
-def control_valve():
-    action = request.json.get('action')
-    if action == "open":
-        return jsonify({"status": "Valve Opened"})
-    elif action == "close":
-        return jsonify({"status": "Valve Closed"})
-    else:
-        return jsonify({"status": "Invalid Action"}), 400
+@app.route('/data', methods=['GET'])
+def data():
+    # Replace with actual IoT data retrieval logic if needed
+    return jsonify(get_simulated_data())
 
 if __name__ == '__main__':
     app.run(debug=True)
