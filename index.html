@@ -3,46 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Water Conservation Device</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Water Monitoring System</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/Chart.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Smart Water Conservation Device</h1>
-        <p>Innovative solutions for water efficiency and sustainability</p>
-        <nav>
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Smart Water Monitoring System</h1>
     </header>
     <main>
-        <section id="features">
-            <h2>Features</h2>
-            <ul>
-                <li>Automatic water usage monitoring</li>
-                <li>Smart alerts for leaks and overuse</li>
-                <li>Eco-friendly design</li>
-            </ul>
+        <section>
+            <h2>Water Flow Sensors</h2>
+            <div>
+                <canvas id="flowChart"></canvas>
+                <p id="flowDetails"></p>
+            </div>
         </section>
-        <section id="how-it-works">
-            <h2>How It Works</h2>
-            <p>Our device tracks water consumption in real-time and sends data to a cloud-based dashboard. Users receive alerts for anomalies, enabling proactive management.</p>
+        <section>
+            <h2>Water Level Sensors</h2>
+            <div>
+                <canvas id="levelChart"></canvas>
+                <p id="levelDetails"></p>
+            </div>
         </section>
-        <section id="team">
-            <h2>Meet the Team</h2>
-            <p>We are a group of passionate engineers dedicated to creating sustainable solutions for the future.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: info@smartwaterdevice.com</p>
+        <section>
+            <h2>pH Level</h2>
+            <div>
+                <canvas id="phChart"></canvas>
+            </div>
         </section>
     </main>
     <footer>
-        <p>© 2024 Smart Water Conservation Device | All Rights Reserved</p>
+        <p>© 2024 Smart Water Monitoring</p>
     </footer>
+    <script src="static/script.js"></script>
 </body>
 </html>
