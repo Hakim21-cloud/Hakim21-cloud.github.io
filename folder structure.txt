@@ -1,6 +1,0 @@
-iot-water-dashboard/
-├── index.html         # Main website
-├── styles.css         # Styling
-├── script.js          # JavaScript for graphs and logic
-├── data.json          # Simulated sensor data
-├── README.md          # Project documentation
