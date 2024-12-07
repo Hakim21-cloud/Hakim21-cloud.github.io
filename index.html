@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blynk Water Flow Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Smart Water Conservation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Blynk Water Flow Dashboard</h1>
+        <h1>Smart Water Conservation Dashboard</h1>
     </header>
     <main>
-        <section>
+        <section id="graphs">
             <h2>Water Flow Sensors</h2>
-            <canvas id="flowSensorChart"></canvas>
-            <p>Average Flow: <span id="averageFlow"></span> L/min</p>
+            <canvas id="waterFlowChart"></canvas>
+            <p id="waterBill"></p>
+
+            <h2>Water Level Sensors</h2>
+            <canvas id="waterLevelChart"></canvas>
+
+            <h2>pH Levels</h2>
+            <canvas id="pHChart"></canvas>
         </section>
     </main>
     <footer>
-        <p>© 2024 Smart Water Conservation System</p>
+        <p>© 2024 Smart Water Conservation</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
