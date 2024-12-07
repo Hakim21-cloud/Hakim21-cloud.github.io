@@ -1,5 +1,10 @@
-iot-blynk-dashboard/
-├── index.html         # Main web page
-├── styles.css         # Styling
-├── script.js          # JavaScript for fetching and displaying data
-├── README.md          # Project documentation
+iot-water-dashboard/
+├── app.py                # Flask server to serve the website
+├── templates/
+│   └── index.html        # Main webpage
+├── static/
+│   ├── styles.css        # CSS for styling
+│   └── script.js         # JavaScript for graphs and interactions
+├── arduino/              # Arduino-related files
+│   └── blynk_code.ino    # Arduino sketch for Blynk integration
+└── requirements.txt      # Python dependencies
