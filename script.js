@@ -1,42 +1,55 @@
-// Sample data simulation
-const data = {
-    flow: [10, 20, 15, 25],
-    level: [60, 70],
-    pH: [7.2, 7.4, 6.8, 7.1],
-    bill: 250.75 // Example water bill
-};
+// Fetch simulated data from data.json
+fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+        // Water Flow Chart
+        const waterFlowCtx = document.getElementById('waterFlowChart').getContext('2d');
+        new Chart(waterFlowCtx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: data.waterFlow.length }, (_, i) => `Day ${i + 1}`),
+                datasets: [{
+                    label: 'Water Flow (L/min)',
+                    data: data.waterFlow,
+                    borderColor: 'blue',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            }
+        });
+        document.getElementById('waterBill').textContent = data.waterBill.toFixed(2);
+        const avgWaterFlow = (data.waterFlow.reduce((a, b) => a + b, 0) / data.waterFlow.length).toFixed(2);
+        document.getElementById('waterFlowPercentage').textContent = avgWaterFlow;
 
-// Utility to create charts
-function createChart(ctxId, label, data, color) {
-    const ctx = document.getElementById(ctxId).getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: data.map((_, i) => `Data ${i + 1}`),
-            datasets: [{
-                label: label,
-                data: data,
-                borderColor: color,
-                borderWidth: 2,
-                fill: false
-            }]
-        }
+        // Water Level Chart
+        const waterLevelCtx = document.getElementById('waterLevelChart').getContext('2d');
+        new Chart(waterLevelCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Sensor 1', 'Sensor 2'],
+                datasets: [{
+                    label: 'Water Level (%)',
+                    data: data.waterLevel,
+                    backgroundColor: ['#007BFF', '#00C853']
+                }]
+            }
+        });
+        const avgWaterLevel = (data.waterLevel.reduce((a, b) => a + b, 0) / data.waterLevel.length).toFixed(2);
+        document.getElementById('waterLevelPercentage').textContent = avgWaterLevel;
+
+        // pH Level Chart
+        const phLevelCtx = document.getElementById('phLevelChart').getContext('2d');
+        new Chart(phLevelCtx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: data.pHLevel.length }, (_, i) => `Sample ${i + 1}`),
+                datasets: [{
+                    label: 'pH Level',
+                    data: data.pHLevel,
+                    borderColor: 'green',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            }
+        });
     });
-}
-
-// Display graphs and details
-document.addEventListener("DOMContentLoaded", () => {
-    // Water Flow Chart
-    createChart("flowChart", "Water Flow (L/min)", data.flow, "blue");
-    const totalFlow = data.flow.reduce((sum, value) => sum + value, 0);
-    const flowPercentage = (totalFlow / (data.flow.length * 30)) * 100; // Example calculation
-    document.getElementById("flowDetails").textContent = `Total Flow: ${totalFlow} L, Percentage: ${flowPercentage.toFixed(1)}%, Estimated Bill: $${data.bill.toFixed(2)}`;
-
-    // Water Level Chart
-    createChart("levelChart", "Water Level (%)", data.level, "green");
-    const levelAverage = (data.level.reduce((sum, value) => sum + value, 0) / data.level.length).toFixed(1);
-    document.getElementById("levelDetails").textContent = `Average Level: ${levelAverage}%.`;
-
-    // pH Level Chart
-    createChart("phChart", "pH Levels", data.pH, "orange");
-});
