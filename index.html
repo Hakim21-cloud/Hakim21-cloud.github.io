@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Water Conservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Smart Water Conservation System</h1>
+    </header>
+
+    <main>
+        <!-- Main Menu -->
+        <section id="main-menu">
+            <h2>Main Menu</h2>
+            <ul>
+                <li><button onclick="showWaterValve()">Water Valve Control</button></li>
+                <li><button onclick="showWaterFlow()">Water Flow Sensor</button></li>
+                <li><button onclick="showWaterLevel()">Water Level Sensor</button></li>
+                <li><button onclick="showPhLevel()">pH Level</button></li>
+            </ul>
+        </section>
+
+        <!-- Dynamic Content Section -->
+        <section id="output-section" style="display: none;">
+            <h2 id="section-title"></h2>
+            <div id="content-area"></div>
+            <button id="back-button" onclick="showMainMenu()">Back to Menu</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Smart Water Conservation System</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
