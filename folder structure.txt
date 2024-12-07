@@ -1,0 +1,8 @@
+iot-water-dashboard/
+├── app.py            # Flask application
+├── templates/
+│   └── index.html    # Main menu and dynamic sections
+├── static/
+│   ├── styles.css    # CSS for styling
+│   └── script.js     # JavaScript for functionality
+└── requirements.txt   # Python dependencies
