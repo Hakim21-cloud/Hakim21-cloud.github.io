@@ -1,6 +1,5 @@
-iot-water-dashboard/
-├── index.html         # Main website
+iot-blynk-dashboard/
+├── index.html         # Main web page
 ├── styles.css         # Styling
-├── script.js          # JavaScript for graphs and logic
-├── data.json          # Simulated sensor data
+├── script.js          # JavaScript for fetching and displaying data
 ├── README.md          # Project documentation
