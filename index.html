@@ -3,29 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Water Conservation Dashboard</title>
+    <title>Blynk Water Flow Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Smart Water Conservation Dashboard</h1>
+        <h1>Blynk Water Flow Dashboard</h1>
     </header>
     <main>
         <section>
-            <h2>Water Flow Sensor</h2>
-            <canvas id="waterFlowChart"></canvas>
-            <p>Estimated Water Bill: $<span id="waterBill"></span></p>
-            <p>Water Usage: <span id="waterFlowPercentage"></span>%</p>
-        </section>
-        <section>
-            <h2>Water Level Sensor</h2>
-            <canvas id="waterLevelChart"></canvas>
-            <p>Water Levels: <span id="waterLevelPercentage"></span>%</p>
-        </section>
-        <section>
-            <h2>pH Levels</h2>
-            <canvas id="phLevelChart"></canvas>
+            <h2>Water Flow Sensors</h2>
+            <canvas id="flowSensorChart"></canvas>
+            <p>Average Flow: <span id="averageFlow"></span> L/min</p>
         </section>
     </main>
     <footer>
