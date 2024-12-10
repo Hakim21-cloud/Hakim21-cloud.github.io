@@ -1,28 +1,28 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
-# Simulated database for live data
+# In-memory storage for live data
 data = {
-    "waterFlow": [0, 0, 0, 0],
-    "waterLevel": [0, 0],
-    "pHLevel": 0.0
+    "flow1": 0,
+    "flow2": 0,
+    "flow3": 0,
+    "flow4": 0,
+    "level1": 0,
+    "level2": 0,
+    "pH": 7.0
 }
 
-@app.route('/upload-data', methods=['POST'])
-def upload_data():
+@app.route('/update', methods=['POST'])
+def update_data():
     global data
-    incoming_data = request.get_json()
-    data["waterFlow"] = incoming_data.get("waterFlow", [0, 0, 0, 0])
-    data["waterLevel"] = incoming_data.get("waterLevel", [0, 0])
-    data["pHLevel"] = incoming_data.get("pHLevel", 0.0)
+    data.update(request.json)
     return jsonify({"status": "success"}), 200
 
-@app.route('/get-data', methods=['GET'])
+@app.route('/data', methods=['GET'])
 def get_data():
-    return jsonify(data)
+    return jsonify(data), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
