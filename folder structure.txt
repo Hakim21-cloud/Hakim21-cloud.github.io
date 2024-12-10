@@ -1,9 +1,14 @@
-smart-water-app/
+Hakim21-cloud.github.io/
+│
+├── index.html            # Main dashboard page
+├── css/
+│   └── styles.css        # Styles for the dashboard
+├── js/
+│   └── script.js         # JavaScript for data fetching and updating charts
 ├── backend/
-│   ├── app.py            # Flask application
-│   └── requirements.txt  # Python dependencies
-├── frontend/
-│   ├── index.html        # Main HTML file
-│   ├── styles.css        # CSS for styling
-│   └── script.js         # JavaScript for functionality
-└── README.md             # Documentation
+│   ├── app.py            # Flask server for data handling (optional Node.js alternative)
+│   ├── database.json     # Simple JSON-based storage for live data
+│   └── README.md         # Instructions for backend setup
+├── README.md             # Project overview and usage guide
+└── data/                 # (Optional) Static JSON files for testing
+    └── mock_data.json    # Example data for testing without hardware
