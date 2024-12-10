@@ -1,81 +1,86 @@
-const apiUrl = "https://hakim21-cloud.github.io/esp32/esp32_data.json"; // URL to ESP32 data
+// Set up chart data
+let waterLevelChart, flowRateChart, pHChart;
 
-// Fetch data from ESP32
-async function fetchESP32Data() {
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    updateDashboard(data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const ctx1 = document.getElementById("waterLevelChart").getContext("2d");
+  waterLevelChart = new Chart(ctx1, {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: "Tank 1 Water Level (%)",
+          data: [],
+          borderColor: "blue",
+          fill: false,
+        },
+        {
+          label: "Tank 2 Water Level (%)",
+          data: [],
+          borderColor: "green",
+          fill: false,
+        },
+      ],
+    },
+  });
 
-// Update the dashboard with live data
-function updateDashboard(data) {
-  // Update Flow Sensor Chart
-  updateChart(flowChart, [data.flow1, data.flow2, data.flow3, data.flow4]);
-  document.getElementById("flowPercent").textContent =
-    `${calculatePercentage(data.flow1, data.flow2, data.flow3, data.flow4)}%`;
+  const ctx2 = document.getElementById("flowRateChart").getContext("2d");
+  flowRateChart = new Chart(ctx2, {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        { label: "Flow Sensor 1", data: [], borderColor: "red" },
+        { label: "Flow Sensor 2", data: [], borderColor: "blue" },
+        { label: "Flow Sensor 3", data: [], borderColor: "yellow" },
+        { label: "Flow Sensor 4", data: [], borderColor: "green" },
+      ],
+    },
+  });
 
-  // Update Water Level Chart
-  updateChart(levelChart, [data.level1, data.level2]);
-  document.getElementById("tank1Level").textContent = data.level1;
-  document.getElementById("tank2Level").textContent = data.level2;
+  const ctx3 = document.getElementById("pHChart").getContext("2d");
+  pHChart = new Chart(ctx3, {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        { label: "pH Level", data: [], borderColor: "purple", fill: false },
+      ],
+    },
+  });
 
-  // Update pH Level Chart
+  // Poll data every 5 seconds
+  setInterval(fetchData, 5000);
+});
+
+async function fetchData() {
+  const response = await fetch("./data.json");
+  const data = await response.json();
+
+  // Update water levels
+  updateChart(waterLevelChart, [data.waterLevel1, data.waterLevel2]);
+
+  // Update flow rates
+  updateChart(flowRateChart, [
+    data.flowRate1,
+    data.flowRate2,
+    data.flowRate3,
+    data.flowRate4,
+  ]);
+
+  // Update pH
   updateChart(pHChart, [data.pH]);
-  document.getElementById("pHValue").textContent = data.pH.toFixed(2);
+
+  // Update billing
+  document.getElementById("billing").innerText = `Total Flow: ${data.totalFlow}L, Total Bill: RM${(
+    data.totalFlow * 0.002
+  ).toFixed(2)}`;
 }
 
-// Helper to calculate percentage for flow sensors
-function calculatePercentage(...flows) {
-  const total = flows.reduce((sum, flow) => sum + flow, 0);
-  return flows.map(flow => ((flow / total) * 100).toFixed(2)).join(", ");
-}
-
-// Helper to update a chart
 function updateChart(chart, newData) {
-  chart.data.datasets[0].data = newData;
+  chart.data.labels.push(new Date().toLocaleTimeString());
+  chart.data.datasets.forEach((dataset, i) => {
+    dataset.data.push(newData[i]);
+  });
   chart.update();
 }
-
-// Initialize Charts
-const flowChart = new Chart(document.getElementById("flowChart"), {
-  type: "bar",
-  data: {
-    labels: ["Flow 1", "Flow 2", "Flow 3", "Flow 4"],
-    datasets: [{
-      label: "Flow Rates (L/min)",
-      backgroundColor: ["blue", "green", "orange", "red"],
-      data: []
-    }]
-  }
-});
-
-const levelChart = new Chart(document.getElementById("levelChart"), {
-  type: "bar",
-  data: {
-    labels: ["Tank 1", "Tank 2"],
-    datasets: [{
-      label: "Water Levels (%)",
-      backgroundColor: ["blue", "green"],
-      data: []
-    }]
-  }
-});
-
-const pHChart = new Chart(document.getElementById("pHChart"), {
-  type: "line",
-  data: {
-    labels: ["pH"],
-    datasets: [{
-      label: "pH Levels",
-      borderColor: "purple",
-      data: []
-    }]
-  }
-});
-
-// Fetch data every second
-setInterval(fetchESP32Data, 1000);
