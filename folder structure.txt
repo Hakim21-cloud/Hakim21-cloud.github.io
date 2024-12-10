@@ -1,11 +1,10 @@
 Hakim21-cloud.github.io/
 │
-├── index.html            # Main dashboard page
-├── css/
-│   └── styles.css        # CSS styling for the website
-├── js/
-│   └── script.js         # JavaScript for live data fetching and chart updates
-├── esp32/
-│   ├── esp32_data.json   # Simulated ESP32 JSON data (for testing live updates)
-│   ├── update_data.py    # Python script to update data from ESP32 (optional)
-├── README.md             # Project overview and setup instructions
+├── index.html            # Main HTML file
+├── script.js             # JavaScript for handling charts and API
+├── style.css             # Optional CSS file for styling
+├── data.json             # Placeholder for live ESP32 data
+├── README.md             # Documentation
+├── api/
+│   ├── app.py            # Python script to handle API (if needed)
+└── assets/               # Assets like images or other resources
