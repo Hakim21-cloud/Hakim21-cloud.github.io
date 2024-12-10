@@ -1,38 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESP32 Smart Water Conservation Dashboard</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Smart Water Monitoring</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>ESP32 Smart Water Conservation Dashboard</h1>
-  </header>
-  <main>
-    <section id="water-flow">
-      <h2>Water Flow Sensors</h2>
-      <canvas id="flowChart"></canvas>
-      <p>Percentage of total flow per sensor: <span id="flowPercent"></span></p>
-    </section>
+  <h1>Water Monitoring Dashboard</h1>
 
-    <section id="water-level">
-      <h2>Water Levels</h2>
-      <canvas id="levelChart"></canvas>
-      <p>Tank 1 Level: <span id="tank1Level"></span>% | Tank 2 Level: <span id="tank2Level"></span>%</p>
-    </section>
+  <!-- Water Levels -->
+  <h2>Water Levels</h2>
+  <canvas id="waterLevelChart"></canvas>
 
-    <section id="ph-level">
-      <h2>pH Levels</h2>
-      <canvas id="pHChart"></canvas>
-      <p>Current pH Level: <span id="pHValue"></span></p>
-    </section>
-  </main>
-  <footer>
-    <p>Data powered by ESP32 | Developed by Hakim21</p>
-  </footer>
-  <script src="js/script.js"></script>
+  <!-- Flow Rates -->
+  <h2>Flow Rates</h2>
+  <canvas id="flowRateChart"></canvas>
+
+  <!-- pH Level -->
+  <h2>pH Level</h2>
+  <canvas id="pHChart"></canvas>
+
+  <!-- Total Flow and Billing -->
+  <h2>Total Flow and Billing</h2>
+  <div id="billing"></div>
 </body>
 </html>
