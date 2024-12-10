@@ -1,54 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/data')
+const waterFlowChartCtx = document.getElementById('waterFlowChart').getContext('2d');
+const waterLevelChartCtx = document.getElementById('waterLevelChart').getContext('2d');
+const pHChartCtx = document.getElementById('pHChart').getContext('2d');
+
+// Initialize charts
+const waterFlowChart = new Chart(waterFlowChartCtx, {
+    type: 'line',
+    data: { labels: [], datasets: [{ label: 'Water Flow (L/min)', data: [], borderColor: 'blue' }] },
+});
+const waterLevelChart = new Chart(waterLevelChartCtx, {
+    type: 'bar',
+    data: { labels: ['Tank 1', 'Tank 2'], datasets: [{ label: 'Water Level (%)', data: [], backgroundColor: 'green' }] },
+});
+const pHChart = new Chart(pHChartCtx, {
+    type: 'line',
+    data: { labels: [], datasets: [{ label: 'pH Levels', data: [], borderColor: 'purple' }] },
+});
+
+// Fetch and update charts
+function updateCharts() {
+    fetch('/get-data')
         .then(response => response.json())
         .then(data => {
-            // Water Flow Sensor Chart
-            const flowCtx = document.getElementById('waterFlowChart').getContext('2d');
-            new Chart(flowCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
-                    datasets: [{
-                        label: 'Water Flow (L/min)',
-                        data: data.waterFlow,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                }
-            });
-            document.getElementById('waterBill').textContent = `Estimated Bill: $${data.waterBill}`;
+            // Update Water Flow Chart
+            waterFlowChart.data.labels = Array.from({ length: data.waterFlowSensors.length }, (_, i) => `Sensor ${i + 1}`);
+            waterFlowChart.data.datasets[0].data = data.waterFlowSensors;
+            waterFlowChart.update();
 
-            // Water Level Sensor Chart
-            const levelCtx = document.getElementById('waterLevelChart').getContext('2d');
-            new Chart(levelCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Sensor 1', 'Sensor 2'],
-                    datasets: [{
-                        label: 'Water Level (%)',
-                        data: data.waterLevel,
-                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-                        borderWidth: 1
-                    }]
-                }
-            });
+            // Update Water Flow Percentage
+            const totalFlow = data.waterFlowSensors.reduce((a, b) => a + b, 0);
+            document.getElementById('waterFlowPercentage').textContent = `Total Water Flow: ${totalFlow} L/min`;
 
-            // pH Level Chart
-            const phCtx = document.getElementById('pHChart').getContext('2d');
-            new Chart(phCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Current'],
-                    datasets: [{
-                        label: 'pH Level',
-                        data: data.pHLevel,
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        borderWidth: 1
-                    }]
-                }
-            });
+            // Update Water Level Chart
+            waterLevelChart.data.datasets[0].data = data.waterLevelSensors;
+            waterLevelChart.update();
+
+            // Update Water Level Percentage
+            const avgLevel = (data.waterLevelSensors.reduce((a, b) => a + b, 0) / data.waterLevelSensors.length).toFixed(2);
+            document.getElementById('waterLevelPercentage').textContent = `Average Water Level: ${avgLevel}%`;
+
+            // Update pH Chart
+            pHChart.data.labels = Array.from({ length: data.pHLevels.length }, (_, i) => `Reading ${i + 1}`);
+            pHChart.data.datasets[0].data = data.pHLevels;
+            pHChart.update();
         });
-});
+}
+
+// Periodically fetch data
+setInterval(updateCharts, 2000);
