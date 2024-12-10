@@ -1,49 +1,73 @@
-const waterFlowChartCtx = document.getElementById('waterFlowChart').getContext('2d');
-const waterLevelChartCtx = document.getElementById('waterLevelChart').getContext('2d');
-const pHChartCtx = document.getElementById('pHChart').getContext('2d');
+const serverUrl = "http://your-server-address/get-data";
 
-// Initialize charts
-const waterFlowChart = new Chart(waterFlowChartCtx, {
-    type: 'line',
-    data: { labels: [], datasets: [{ label: 'Water Flow (L/min)', data: [], borderColor: 'blue' }] },
-});
-const waterLevelChart = new Chart(waterLevelChartCtx, {
-    type: 'bar',
-    data: { labels: ['Tank 1', 'Tank 2'], datasets: [{ label: 'Water Level (%)', data: [], backgroundColor: 'green' }] },
-});
-const pHChart = new Chart(pHChartCtx, {
-    type: 'line',
-    data: { labels: [], datasets: [{ label: 'pH Levels', data: [], borderColor: 'purple' }] },
-});
+// Function to fetch and update data
+async function fetchData() {
+    const response = await fetch(serverUrl);
+    const data = await response.json();
 
-// Fetch and update charts
-function updateCharts() {
-    fetch('/get-data')
-        .then(response => response.json())
-        .then(data => {
-            // Update Water Flow Chart
-            waterFlowChart.data.labels = Array.from({ length: data.waterFlowSensors.length }, (_, i) => `Sensor ${i + 1}`);
-            waterFlowChart.data.datasets[0].data = data.waterFlowSensors;
-            waterFlowChart.update();
-
-            // Update Water Flow Percentage
-            const totalFlow = data.waterFlowSensors.reduce((a, b) => a + b, 0);
-            document.getElementById('waterFlowPercentage').textContent = `Total Water Flow: ${totalFlow} L/min`;
-
-            // Update Water Level Chart
-            waterLevelChart.data.datasets[0].data = data.waterLevelSensors;
-            waterLevelChart.update();
-
-            // Update Water Level Percentage
-            const avgLevel = (data.waterLevelSensors.reduce((a, b) => a + b, 0) / data.waterLevelSensors.length).toFixed(2);
-            document.getElementById('waterLevelPercentage').textContent = `Average Water Level: ${avgLevel}%`;
-
-            // Update pH Chart
-            pHChart.data.labels = Array.from({ length: data.pHLevels.length }, (_, i) => `Reading ${i + 1}`);
-            pHChart.data.datasets[0].data = data.pHLevels;
-            pHChart.update();
-        });
+    updateCharts(data);
 }
 
-// Periodically fetch data
-setInterval(updateCharts, 2000);
+// Chart instances
+let waterFlowChart, waterLevelChart, pHChart;
+
+function updateCharts(data) {
+    if (!waterFlowChart) {
+        const ctx1 = document.getElementById('waterFlowChart').getContext('2d');
+        waterFlowChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+                datasets: [{
+                    label: 'Water Flow (L/min)',
+                    data: data.waterFlow,
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            }
+        });
+    } else {
+        waterFlowChart.data.datasets[0].data = data.waterFlow;
+        waterFlowChart.update();
+    }
+
+    if (!waterLevelChart) {
+        const ctx2 = document.getElementById('waterLevelChart').getContext('2d');
+        waterLevelChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Sensor 1', 'Sensor 2'],
+                datasets: [{
+                    label: 'Water Level (%)',
+                    data: data.waterLevel,
+                    backgroundColor: ['blue', 'green']
+                }]
+            }
+        });
+    } else {
+        waterLevelChart.data.datasets[0].data = data.waterLevel;
+        waterLevelChart.update();
+    }
+
+    if (!pHChart) {
+        const ctx3 = document.getElementById('pHChart').getContext('2d');
+        pHChart = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['pH Reading'],
+                datasets: [{
+                    label: 'pH Level',
+                    data: [data.pHLevel],
+                    borderColor: 'red',
+                    fill: false
+                }]
+            }
+        });
+    } else {
+        pHChart.data.datasets[0].data = [data.pHLevel];
+        pHChart.update();
+    }
+}
+
+// Fetch data every 5 seconds
+setInterval(fetchData, 5000);
