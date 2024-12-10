@@ -1,6 +1,6 @@
 {
-    "waterFlow": [5, 10, 7, 12],
-    "waterLevel": [50, 60],
-    "pHLevel": [7.0, 7.2, 6.8, 7.1],
-    "waterBill": 120.75
+  "waterFlow": [10.5, 12.3, 9.8, 11.2],
+  "waterLevel": [65, 70],
+  "pHLevel": 7.5,
+  "totalBill": 1.23
 }
