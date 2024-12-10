@@ -1,20 +1,12 @@
-# Smart Water Conservation System
+# Smart Water Conservation Dashboard
 
-A web application that monitors and visualizes live data from IoT sensors for smart water conservation.
+This project provides a live monitoring dashboard for water conservation systems, showing data from water flow sensors, water level sensors, and pH sensors.
 
 ## Features
-- **Water Flow Sensors**: Displays real-time graph, percentage, and estimated water bill.
-- **Water Level Sensors**: Shows graph and percentage for water levels.
-- **pH Level**: Real-time graph visualization of water pH levels.
+1. Real-time graph updates for:
+   - Water Flow Sensors
+   - Water Level Sensors
+   - pH Levels
+2. Easy integration with an ESP32-based IoT system.
 
-## Technologies Used
-- **Frontend**: HTML, CSS, JavaScript, Chart.js
-- **Backend**: Flask (Python)
-- **IoT**: Arduino with ESP8266/ESP32 for live data streaming
-
-## Installation Guide
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/smart-water-app.git
-cd smart-water-app
+## Folder Structure
