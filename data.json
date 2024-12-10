@@ -1,6 +1,9 @@
 {
-  "waterFlow": [10.5, 12.3, 9.8, 11.2],
-  "waterLevel": [65, 70],
-  "pHLevel": 7.5,
-  "totalBill": 1.23
+  "flow1": 10.5,
+  "flow2": 8.2,
+  "flow3": 6.1,
+  "flow4": 5.0,
+  "level1": 75,
+  "level2": 60,
+  "pH": 7.5
 }
