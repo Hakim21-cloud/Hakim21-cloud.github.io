@@ -1,73 +1,59 @@
-const serverUrl = "http://your-server-address/get-data";
-
-// Function to fetch and update data
 async function fetchData() {
-    const response = await fetch(serverUrl);
+  try {
+    const response = await fetch('https://hakim21-cloud.github.io/backend/database.json');
     const data = await response.json();
 
     updateCharts(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 }
-
-// Chart instances
-let waterFlowChart, waterLevelChart, pHChart;
 
 function updateCharts(data) {
-    if (!waterFlowChart) {
-        const ctx1 = document.getElementById('waterFlowChart').getContext('2d');
-        waterFlowChart = new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
-                datasets: [{
-                    label: 'Water Flow (L/min)',
-                    data: data.waterFlow,
-                    borderColor: 'blue',
-                    fill: false
-                }]
-            }
-        });
-    } else {
-        waterFlowChart.data.datasets[0].data = data.waterFlow;
-        waterFlowChart.update();
+  // Water Flow Chart
+  const flowCtx = document.getElementById('flowChart').getContext('2d');
+  new Chart(flowCtx, {
+    type: 'line',
+    data: {
+      labels: ['Flow 1', 'Flow 2', 'Flow 3', 'Flow 4'],
+      datasets: [{
+        label: 'Flow Rates (L/min)',
+        data: [data.flow1, data.flow2, data.flow3, data.flow4],
+        borderColor: 'blue',
+        fill: false
+      }]
     }
+  });
 
-    if (!waterLevelChart) {
-        const ctx2 = document.getElementById('waterLevelChart').getContext('2d');
-        waterLevelChart = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Sensor 1', 'Sensor 2'],
-                datasets: [{
-                    label: 'Water Level (%)',
-                    data: data.waterLevel,
-                    backgroundColor: ['blue', 'green']
-                }]
-            }
-        });
-    } else {
-        waterLevelChart.data.datasets[0].data = data.waterLevel;
-        waterLevelChart.update();
+  // Water Level Chart
+  const levelCtx = document.getElementById('levelChart').getContext('2d');
+  new Chart(levelCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Tank 1', 'Tank 2'],
+      datasets: [{
+        label: 'Water Levels (%)',
+        data: [data.level1, data.level2],
+        backgroundColor: ['green', 'yellow']
+      }]
     }
+  });
 
-    if (!pHChart) {
-        const ctx3 = document.getElementById('pHChart').getContext('2d');
-        pHChart = new Chart(ctx3, {
-            type: 'line',
-            data: {
-                labels: ['pH Reading'],
-                datasets: [{
-                    label: 'pH Level',
-                    data: [data.pHLevel],
-                    borderColor: 'red',
-                    fill: false
-                }]
-            }
-        });
-    } else {
-        pHChart.data.datasets[0].data = [data.pHLevel];
-        pHChart.update();
+  // pH Level Chart
+  const pHCtx = document.getElementById('pHChart').getContext('2d');
+  new Chart(pHCtx, {
+    type: 'line',
+    data: {
+      labels: ['Time'],
+      datasets: [{
+        label: 'pH Levels',
+        data: [data.pH],
+        borderColor: 'red',
+        fill: false
+      }]
     }
+  });
 }
 
-// Fetch data every 5 seconds
-setInterval(fetchData, 5000);
+// Fetch and update data every second
+setInterval(fetchData, 1000);
