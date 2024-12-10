@@ -1,13 +1,20 @@
-# Blynk Water Flow Dashboard
+# Smart Water Conservation System
 
-This project displays real-time water flow data from 4 sensors connected to an Arduino via Blynk.
+A web application that monitors and visualizes live data from IoT sensors for smart water conservation.
 
 ## Features
-- Real-time updates every 5 seconds.
-- Average flow calculation for all sensors.
-- Responsive charts powered by [Chart.js](https://www.chartjs.org/).
+- **Water Flow Sensors**: Displays real-time graph, percentage, and estimated water bill.
+- **Water Level Sensors**: Shows graph and percentage for water levels.
+- **pH Level**: Real-time graph visualization of water pH levels.
 
-## Setup
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/iot-blynk-dashboard.git
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript, Chart.js
+- **Backend**: Flask (Python)
+- **IoT**: Arduino with ESP8266/ESP32 for live data streaming
+
+## Installation Guide
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/smart-water-app.git
+cd smart-water-app
