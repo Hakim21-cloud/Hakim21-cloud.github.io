@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Water Conservation Dashboard</title>
+  <title>ESP32 Smart Water Conservation Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
-    <h1>Smart Water Conservation Dashboard</h1>
+    <h1>ESP32 Smart Water Conservation Dashboard</h1>
   </header>
   <main>
-    <section>
+    <section id="water-flow">
       <h2>Water Flow Sensors</h2>
       <canvas id="flowChart"></canvas>
+      <p>Percentage of total flow per sensor: <span id="flowPercent"></span></p>
     </section>
-    <section>
+
+    <section id="water-level">
       <h2>Water Levels</h2>
       <canvas id="levelChart"></canvas>
+      <p>Tank 1 Level: <span id="tank1Level"></span>% | Tank 2 Level: <span id="tank2Level"></span>%</p>
     </section>
-    <section>
+
+    <section id="ph-level">
       <h2>pH Levels</h2>
       <canvas id="pHChart"></canvas>
+      <p>Current pH Level: <span id="pHValue"></span></p>
     </section>
   </main>
+  <footer>
+    <p>Data powered by ESP32 | Developed by Hakim21</p>
+  </footer>
   <script src="js/script.js"></script>
 </body>
 </html>
