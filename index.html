@@ -1,9 +1,23 @@
+### data.json
+```json
+{
+  "waterLevel1": 50.5,
+  "waterLevel2": 70.3,
+  "pH": 7.4,
+  "totalFlow": 120.5,
+  "solenoidState": "CLOSED"
+}
+```
+
+### index.html
+```html
 <!DOCTYPE html>
 <html>
 <head>
   <title>Smart Water Monitoring</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Water Monitoring Dashboard</h1>
@@ -20,8 +34,11 @@
   <h2>pH Level</h2>
   <canvas id="pHChart"></canvas>
 
-  <!-- Total Flow and Billing -->
-  <h2>Total Flow and Billing</h2>
-  <div id="billing"></div>
+  <!-- Solenoid Control -->
+  <h2>Solenoid Control</h2>
+  <button id="openValve">Open Valve</button>
+  <button id="closeValve">Close Valve</button>
+
+  <h3 id="solenoidState">Solenoid State: CLOSED</h3>
 </body>
 </html>
