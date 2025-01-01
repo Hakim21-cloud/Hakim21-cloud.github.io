@@ -59,6 +59,9 @@ async function fetchData() {
   updateChart(flowRateChart, [data.totalFlow]);
   updateChart(pHChart, [data.pH]);
 
+  document.getElementById("totalFlow").innerText = `Total Flow: ${data.totalFlow} L`;
+  document.getElementById("totalBill").innerText = `Total Bill: RM ${data.totalBill.toFixed(2)}`;
+
   document.getElementById("solenoidState").innerText = `Solenoid State: ${data.solenoidState}`;
 }
 
