@@ -1,3 +1,5 @@
+## Folder Structure
+```
 Hakim21-cloud.github.io/
 │
 ├── index.html            # Main HTML file
