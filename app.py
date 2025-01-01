@@ -1,5 +1,3 @@
-### app.py
-```python
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -10,13 +8,20 @@ data = {
     "pH": 0,
     "totalFlow": 0,
     "solenoidState": "CLOSED",
+    "totalBill": 0,
 }
+
+PRICE_PER_LITER = 0.002  # Example price in RM per liter
 
 @app.route("/api/data", methods=["POST"])
 def update_data():
     global data
     received_data = request.json
     data.update(received_data)
+
+    # Calculate total bill based on total flow
+    data["totalBill"] = data["totalFlow"] * PRICE_PER_LITER
+
     return jsonify({"status": "success", "message": "Data updated"})
 
 @app.route("/api/data", methods=["GET"])
