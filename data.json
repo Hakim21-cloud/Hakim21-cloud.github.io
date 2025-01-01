@@ -1,10 +1,9 @@
+### data.json
+```json
 {
   "waterLevel1": 50.5,
   "waterLevel2": 70.3,
   "pH": 7.4,
   "totalFlow": 120.5,
-  "flowRate1": 5.2,
-  "flowRate2": 4.8,
-  "flowRate3": 3.9,
-  "flowRate4": 6.1
+  "solenoidState": "CLOSED"
 }
