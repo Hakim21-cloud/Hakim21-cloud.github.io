@@ -1,18 +1,13 @@
-### README.md
-```markdown
 # Smart Water Conservation Dashboard
 
-This is a live dashboard for monitoring water levels, flow rates, pH values, and total water usage costs using an ESP32 and GitHub Pages.
+This project is a live water monitoring system built with ESP32 and hosted on GitHub Pages.
 
 ## Features
+- Real-time visualization of water levels, flow rates, and pH levels.
+- Automatic and manual water valve control.
+- Billing estimation based on water usage.
 
-- Real-time data visualization of water levels, flow rates, and pH values.
-- Allows manual and automatic control of a solenoid valve.
-- User-friendly graphs and gauges hosted on GitHub Pages.
-
-## Setup Instructions
-
-1. Clone the repository.
-2. Deploy the `index.html` and associated files to GitHub Pages.
-3. Ensure your ESP32 code points to the Flask server running `app.py`.
-```
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Hakim21-cloud/Hakim21-cloud.github.io.git
