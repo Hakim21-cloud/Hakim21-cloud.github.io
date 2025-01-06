@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Smart Water Monitoring</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Water Dashboard</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Water Monitoring Dashboard</h1>
+  <h1>Smart Water Conservation Dashboard</h1>
 
-  <!-- Water Levels -->
-  <h2>Water Levels</h2>
-  <canvas id="waterLevelChart"></canvas>
+  <div class="chart-container">
+    <h2>Water Levels</h2>
+    <canvas id="waterLevelChart"></canvas>
+  </div>
 
-  <!-- Flow Rates -->
-  <h2>Flow Rates</h2>
-  <canvas id="flowRateChart"></canvas>
+  <div class="chart-container">
+    <h2>Flow Rates</h2>
+    <canvas id="flowRateChart"></canvas>
+  </div>
 
-  <!-- pH Level -->
-  <h2>pH Level</h2>
-  <canvas id="pHChart"></canvas>
+  <div class="chart-container">
+    <h2>pH Levels</h2>
+    <canvas id="pHChart"></canvas>
+  </div>
 
-  <!-- Total Flow and Billing -->
-  <h2>Total Flow and Billing</h2>
-  <p id="totalFlow">Total Flow: 0 L</p>
-  <p id="totalBill">Total Bill: RM 0.00</p>
-
-  <!-- Solenoid Control -->
-  <h2>Solenoid Control</h2>
-  <button id="openValve">Open Valve</button>
-  <button id="closeValve">Close Valve</button>
-
-  <h3 id="solenoidState">Solenoid State: CLOSED</h3>
+  <div class="summary">
+    <h2>Total Flow and Billing</h2>
+    <p id="totalFlow">Total Flow: 0 L</p>
+    <p id="billing">Estimated Bill: RM 0.00</p>
+  </div>
 </body>
 </html>
