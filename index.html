@@ -3,33 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Water Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Water Conservation Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Smart Water Conservation Dashboard</h1>
-
-  <div class="chart-container">
-    <h2>Water Levels</h2>
-    <canvas id="waterLevelChart"></canvas>
-  </div>
-
-  <div class="chart-container">
-    <h2>Flow Rates</h2>
-    <canvas id="flowRateChart"></canvas>
-  </div>
-
-  <div class="chart-container">
-    <h2>pH Levels</h2>
-    <canvas id="pHChart"></canvas>
-  </div>
-
-  <div class="summary">
-    <h2>Total Flow and Billing</h2>
-    <p id="totalFlow">Total Flow: 0 L</p>
-    <p id="billing">Estimated Bill: RM 0.00</p>
-  </div>
+  <h1>Water Conservation Dashboard</h1>
+  <h2>Tank Water Levels</h2>
+  <canvas id="waterLevelChart"></canvas>
+  
+  <h2>Flow Rates</h2>
+  <canvas id="flowRateChart"></canvas>
+  
+  <h2>Total Liters and pH Levels</h2>
+  <div id="summary"></div>
 </body>
 </html>
