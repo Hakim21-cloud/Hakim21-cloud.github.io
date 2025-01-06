@@ -1,42 +1,44 @@
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
-data = {
-    "waterLevel1": 0,
-    "waterLevel2": 0,
-    "pH": 0,
-    "totalFlow": 0,
-    "solenoidState": "CLOSED",
-    "totalBill": 0,
-}
+# File path for the data.json file
+DATA_FILE = "data.json"
 
-PRICE_PER_LITER = 0.002  # Example price in RM per liter
+# Helper function to read data from JSON file
+def read_data():
+    with open(DATA_FILE, "r") as file:
+        return json.load(file)
 
+# Helper function to write data to JSON file
+def write_data(data):
+    with open(DATA_FILE, "w") as file:
+        json.dump(data, file, indent=4)
+
+# Route to update data (called by ESP32)
 @app.route("/api/data", methods=["POST"])
 def update_data():
-    global data
-    received_data = request.json
-    data.update(received_data)
+    try:
+        # Parse the incoming JSON data
+        new_data = request.json
 
-    # Calculate total bill based on total flow
-    data["totalBill"] = data["totalFlow"] * PRICE_PER_LITER
+        # Write the new data to the JSON file
+        write_data(new_data)
 
-    return jsonify({"status": "success", "message": "Data updated"})
+        return jsonify({"status": "success", "message": "Data updated"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
+# Route to retrieve data (called by frontend)
 @app.route("/api/data", methods=["GET"])
 def get_data():
-    return jsonify(data)
-
-@app.route("/api/solenoid", methods=["POST"])
-def control_solenoid():
-    global data
-    action = request.json.get("action")
-    if action == "OPEN":
-        data["solenoidState"] = "OPEN"
-    elif action == "CLOSE":
-        data["solenoidState"] = "CLOSED"
-    return jsonify({"status": "success", "solenoidState": data["solenoidState"]})
+    try:
+        # Read the data from the JSON file
+        data = read_data()
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
