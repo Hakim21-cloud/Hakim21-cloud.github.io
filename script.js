@@ -1,82 +1,46 @@
-let waterLevelChart, flowRateChart, pHChart;
+// Initialize empty data arrays
+const waterLevelData = [];
+const flowRateData = [[], [], [], []];
+const pHData = [];
+const labels = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ctx1 = document.getElementById("waterLevelChart").getContext("2d");
-  waterLevelChart = new Chart(ctx1, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        {
-          label: "Tank 1 Water Level (%)",
-          data: [],
-          borderColor: "blue",
-          fill: false,
-        },
-        {
-          label: "Tank 2 Water Level (%)",
-          data: [],
-          borderColor: "green",
-          fill: false,
-        },
-      ],
-    },
-  });
-
-  const ctx2 = document.getElementById("flowRateChart").getContext("2d");
-  flowRateChart = new Chart(ctx2, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        { label: "Flow Rate", data: [], borderColor: "red" },
-      ],
-    },
-  });
-
-  const ctx3 = document.getElementById("pHChart").getContext("2d");
-  pHChart = new Chart(ctx3, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        { label: "pH Level", data: [], borderColor: "purple", fill: false },
-      ],
-    },
-  });
-
-  document.getElementById("openValve").addEventListener("click", () => controlSolenoid("OPEN"));
-  document.getElementById("closeValve").addEventListener("click", () => controlSolenoid("CLOSE"));
-
-  setInterval(fetchData, 1000);
-});
-
-async function fetchData() {
-  const response = await fetch("./data.json");
-  const data = await response.json();
-
-  updateChart(waterLevelChart, [data.waterLevel1, data.waterLevel2]);
-  updateChart(flowRateChart, [data.totalFlow]);
-  updateChart(pHChart, [data.pH]);
-
-  document.getElementById("totalFlow").innerText = `Total Flow: ${data.totalFlow} L`;
-  document.getElementById("totalBill").innerText = `Total Bill: RM ${data.totalBill.toFixed(2)}`;
-
-  document.getElementById("solenoidState").innerText = `Solenoid State: ${data.solenoidState}`;
-}
-
-function updateChart(chart, newData) {
-  chart.data.labels.push(new Date().toLocaleTimeString());
-  chart.data.datasets.forEach((dataset, i) => {
-    dataset.data.push(newData[i]);
+// Update Charts
+function updateChart(chart, data) {
+  chart.data.labels = labels;
+  chart.data.datasets.forEach((dataset, index) => {
+    dataset.data = data[index];
   });
   chart.update();
 }
 
-async function controlSolenoid(action) {
-  await fetch("/api/solenoid", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action }),
-  });
+// Fetch Data
+async function fetchData() {
+  const response = await fetch("../api/data.json");
+  const data = await response.json();
+
+  // Update labels and datasets
+  labels.push(new Date().toLocaleTimeString());
+  waterLevelData.push([data.waterLevel1, data.waterLevel2]);
+  flowRateData[0].push(data.flowRate1);
+  flowRateData[1].push(data.flowRate2);
+  flowRateData[2].push(data.flowRate3);
+  flowRateData[3].push(data.flowRate4);
+  pHData.push([data.pH]);
+
+  // Update HTML
+  document.getElementById("totalFlow").innerText = `Total Flow: ${data.totalFlow} L`;
+  document.getElementById("billing").innerText = `Estimated Bill: RM ${(data.totalFlow * 0.002).toFixed(2)}`;
+
+  // Update Charts
+  updateChart(waterLevelChart, waterLevelData);
+  updateChart(flowRateChart, flowRateData);
+  updateChart(pHChart, pHData);
 }
+
+// Initialize Charts
+const waterLevelChart = new Chart(document.getElementById("waterLevelChart").getContext("2d"), { type: "line", data: { labels, datasets: [{ label: "Tank 1", borderColor: "blue" }, { label: "Tank 2", borderColor: "green" }] } });
+const flowRateChart = new Chart(document.getElementById("flowRateChart").getContext("2d"), { type: "line", data: { labels, datasets: [{ label: "Sensor 1", borderColor: "red" }, { label: "Sensor 2", borderColor: "blue" }, { label: "Sensor 3", borderColor: "yellow" }, { label: "Sensor 4", borderColor: "green" }] } });
+const pHChart = new Chart(document.getElementById("pHChart").getContext("2d"), { type: "line", data: { labels, datasets: [{ label: "pH Level", borderColor: "purple" }] } });
+
+// Poll data every 5 seconds
+setInterval(fetchData, 5000);
