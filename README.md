@@ -1,13 +1,19 @@
-# Smart Water Conservation Dashboard
+# Smart Water Conservation System
 
-This project is a live water monitoring system built with ESP32 and hosted on GitHub Pages.
+A complete system to monitor and manage water conservation with real-time updates using ESP32, Blynk, and a GitHub-hosted dashboard.
 
 ## Features
-- Real-time visualization of water levels, flow rates, and pH levels.
-- Automatic and manual water valve control.
-- Billing estimation based on water usage.
+- **ESP32 Firmware**:
+  - Sends real-time water levels, flow rates, pH, and billing data.
+  - Connects to Blynk Legacy for remote monitoring.
+  - Transmits live data to a backend server.
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Hakim21-cloud/Hakim21-cloud.github.io.git
+- **Backend API**:
+  - Built with Flask to handle ESP32 data.
+  - Serves data in JSON format for the GitHub Pages frontend.
+
+- **GitHub Pages Dashboard**:
+  - Displays live data with interactive graphs using Chart.js.
+  - Real-time updates for water levels, flow rates, pH, and total billing.
+
+## Folder Structure
