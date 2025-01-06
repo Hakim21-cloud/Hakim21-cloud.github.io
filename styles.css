@@ -1,24 +1,19 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #f8f9fa;
 }
 
-h1, h2 {
+h1 {
   text-align: center;
 }
 
-canvas {
+.chart-container {
   margin: 20px auto;
-  display: block;
   max-width: 600px;
 }
 
-button {
-  margin: 5px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
+.summary {
+  text-align: center;
+  margin-top: 20px;
 }
