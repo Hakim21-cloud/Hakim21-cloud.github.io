@@ -1,14 +1,12 @@
-SmartWaterDashboard/
+project/
 │
-├── esp32_code/
-│   ├── smart_water_monitor.ino       # Combined ESP32 Arduino code
-├── website/                          # Files for GitHub Pages
-│   ├── index.html                    # Main HTML file
-│   ├── script.js                     # JavaScript for fetching and visualizing data
-│   ├── style.css                     # Optional CSS for styling
-│   ├── README.md                     # Documentation for the project
-├── api/
-│   ├── app.py                        # Flask-based backend for receiving ESP32 data
-│   ├── data.json                     # JSON file for storing live data
+├── esp32/                           # ESP32 firmware
+│   └── main.ino                     # Combined ESP32 Arduino code
 │
-└── README.md                         # Root README file
+├── backend/                         # Backend API for dynamic data
+│   ├── app.py                       # Flask app to handle ESP32 data
+│   └── requirements.txt             # Python dependencies for the backend
+│
+├── frontend/                        # GitHub Pages website
+│   ├── index.html                   # Main webpage
+│   
