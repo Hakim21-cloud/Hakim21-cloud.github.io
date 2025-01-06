@@ -1,12 +1,14 @@
-## Folder Structure
-```
-Hakim21-cloud.github.io/
+SmartWaterDashboard/
 │
-├── index.html            # Main HTML file
-├── script.js             # JavaScript for handling charts and API
-├── style.css             # Optional CSS file for styling
-├── data.json             # Placeholder for live ESP32 data
-├── README.md             # Documentation
+├── esp32_code/
+│   ├── smart_water_monitor.ino       # Combined ESP32 Arduino code
+├── website/                          # Files for GitHub Pages
+│   ├── index.html                    # Main HTML file
+│   ├── script.js                     # JavaScript for fetching and visualizing data
+│   ├── style.css                     # Optional CSS for styling
+│   ├── README.md                     # Documentation for the project
 ├── api/
-│   ├── app.py            # Python script to handle API (if needed)
-└── assets/               # Assets like images or other resources
+│   ├── app.py                        # Flask-based backend for receiving ESP32 data
+│   ├── data.json                     # JSON file for storing live data
+│
+└── README.md                         # Root README file
