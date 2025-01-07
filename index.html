@@ -1,11 +1,17 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAoPcoShhOXsCsQ96QvWylbEJU7XQHl71s",
-  authDomain: "smart-water-5c1c5.firebaseapp.com",
-  databaseURL: "https://smart-water-5c1c5-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "smart-water-5c1c5",
-  storageBucket: "smart-water-5c1c5.firebasestorage.app",
-  messagingSenderId: "961871479199",
-  appId: "1:961871479199:web:22f64ad500c031e30c3daa",
-  measurementId: "G-0R2KXFHZJZ"
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Water Monitoring</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>ESP32 Water Monitoring</h1>
+    <div class="data" id="water-level">Water Level: Loading...</div>
+    <div class="data" id="flow-rate">Flow Rate: Loading...</div>
+    <div class="error" id="error-message"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
