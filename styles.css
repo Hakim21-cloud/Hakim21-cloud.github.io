@@ -15,3 +15,8 @@ canvas {
   display: block;
   max-width: 600px;
 }
+
+#billing {
+  text-align: center;
+  font-size: 1.2em;
+}
