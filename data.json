@@ -1,4 +1,10 @@
 {
-    "waterLevel1": 75.5,
-    "flowRate1": 2.3
+  "waterLevel1": 45.0,
+  "waterLevel2": 72.3,
+  "pH": 7.5,
+  "totalFlow": 123.4,
+  "flowRate1": 4.5,
+  "flowRate2": 3.7,
+  "flowRate3": 5.2,
+  "flowRate4": 6.1
 }
