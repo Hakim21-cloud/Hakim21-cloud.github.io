@@ -1,12 +1,20 @@
 project/
 │
-├── esp32/                           # ESP32 firmware
-│   └── main.ino                     # Combined ESP32 Arduino code
+├── esp32/                  # ESP32-related code
+│   └── esp32_code.ino      # ESP32 code serving JSON data
 │
-├── backend/                         # Backend API for dynamic data
-│   ├── app.py                       # Flask app to handle ESP32 data
-│   └── requirements.txt             # Python dependencies for the backend
+├── web/                    # Web interface files
+│   ├── index.html          # Main HTML page
+│   ├── css/                # Stylesheets
+│   │   └── styles.css      # CSS file for the UI
+│   ├── js/                 # JavaScript files
+│   │   └── script.js       # Fetch and update logic
+│   ├── data/               # Sample JSON files (optional for mock data)
+│   │   └── sample.json     # Example of JSON response from ESP32
+│   └── README.md           # Documentation for the web project
 │
-├── frontend/                        # GitHub Pages website
-│   ├── index.html                   # Main webpage
-│   
+├── api/                    # Optional Python backend
+│   ├── app.py              # Flask app for handling API requests
+│   └── requirements.txt    # Dependencies for Python backend
+│
+└── README.md               # Project-level documentation
