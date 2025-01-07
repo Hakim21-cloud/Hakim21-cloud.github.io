@@ -1,18 +1,30 @@
-# ESP32 Water Monitoring - Web Interface
+# ESP32 Water Monitoring System
 
-This folder contains the web interface for the ESP32 Water Monitoring system.
+This project monitors water levels and flow rates using an ESP32 and displays the data on a web interface.
 
-## Files and Folders
-- `index.html`: Main webpage.
-- `css/`: Contains stylesheets.
-- `js/`: Contains JavaScript logic for fetching and updating data.
-- `data/`: Optional folder for mock JSON data.
+## Components
+1. **ESP32 Code**:
+   - Serves sensor data as JSON via an HTTP server.
+   - Located in the `esp32/` folder.
+   
+2. **Web Interface**:
+   - Displays real-time data from the ESP32.
+   - Located in the `web/` folder.
+   - Can be deployed on GitHub Pages.
 
-## How to Use
-1. Replace `<ESP32-IP-ADDRESS>` in `js/script.js` with the actual IP address of your ESP32.
-2. Open `index.html` in a browser or host it on GitHub Pages for easy access.
+3. **Optional Flask Backend**:
+   - For testing or additional API processing.
+   - Located in the `api/` folder.
 
-## GitHub Pages Deployment
-1. Push this folder to a GitHub repository.
-2. Enable GitHub Pages under the repository's settings.
-3. Access your website via the provided URL.
+## Setup
+### ESP32
+- Flash the code in `esp32/esp32_code.ino` to your ESP32.
+- Connect to the same network as your web interface.
+
+### Web Interface
+- Update `js/script.js` with the ESP32's IP address.
+- Open `index.html` locally or host it on GitHub Pages.
+
+### Optional Flask Backend
+- Install dependencies with `pip install -r api/requirements.txt`.
+- Run `app.py` for a mock API server.
