@@ -3,44 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Water Monitoring</title>
+  <title>Smart Water Monitoring Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Smart Water Conservation System</h1>
-  </header>
+  <h1>Smart Water Monitoring Dashboard</h1>
 
-  <main>
-    <section>
-      <h2>Water Levels</h2>
-      <canvas id="waterLevelChart"></canvas>
-    </section>
+  <!-- Water Levels -->
+  <h2>Water Levels</h2>
+  <canvas id="waterLevelChart"></canvas>
 
-    <section>
-      <h2>Flow Rates</h2>
-      <canvas id="flowRateChart"></canvas>
-    </section>
+  <!-- Flow Rates -->
+  <h2>Flow Rates</h2>
+  <canvas id="flowRateChart"></canvas>
 
-    <section>
-      <h2>pH Levels</h2>
-      <canvas id="pHChart"></canvas>
-    </section>
+  <!-- pH Levels -->
+  <h2>pH Levels</h2>
+  <canvas id="pHChart"></canvas>
 
-    <section>
-      <h2>Billing and Control</h2>
-      <div id="billing-info">
-        <p id="total-water"></p>
-        <p id="total-bill"></p>
-      </div>
-      <button id="toggle-valve">Toggle Valve</button>
-    </section>
-  </main>
+  <!-- Total Flow and Billing -->
+  <h2>Total Flow and Billing</h2>
+  <div id="billing">
+    <p>Total Water Used: <span id="totalWaterUsed">0</span> L</p>
+    <p>Total Bill: RM <span id="totalBill">0.00</span></p>
+  </div>
 
-  <footer>
-    <p>Developed for IDP Presentation</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
