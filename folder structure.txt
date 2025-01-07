@@ -1,20 +1,8 @@
-project/
+Hakim21-cloud.github.io/
 │
-├── esp32/                  # ESP32-related code
-│   └── esp32_code.ino      # ESP32 code serving JSON data
-│
-├── web/                    # Web interface files
-│   ├── index.html          # Main HTML page
-│   ├── css/                # Stylesheets
-│   │   └── styles.css      # CSS file for the UI
-│   ├── js/                 # JavaScript files
-│   │   └── script.js       # Fetch and update logic
-│   ├── data/               # Sample JSON files (optional for mock data)
-│   │   └── sample.json     # Example of JSON response from ESP32
-│   └── README.md           # Documentation for the web project
-│
-├── api/                    # Optional Python backend
-│   ├── app.py              # Flask app for handling API requests
-│   └── requirements.txt    # Dependencies for Python backend
-│
-└── README.md               # Project-level documentation
+├── index.html            # Main HTML file
+├── script.js             # JavaScript for handling API and UI
+├── style.css             # CSS for styling
+├── README.md             # Documentation
+├── data.json             # Placeholder for dynamic data
+└── assets/               # Additional resources (e.g., images)
