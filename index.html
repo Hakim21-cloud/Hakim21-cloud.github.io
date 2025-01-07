@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 Water Monitoring</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Water Monitoring</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>ESP32 Water Monitoring</h1>
-    <div class="data" id="water-level">Water Level: Loading...</div>
-    <div class="data" id="flow-rate">Flow Rate: Loading...</div>
-    <div class="error" id="error-message"></div>
+  <header>
+    <h1>Smart Water Conservation System</h1>
+  </header>
 
-    <script src="js/script.js"></script>
+  <main>
+    <section>
+      <h2>Water Levels</h2>
+      <canvas id="waterLevelChart"></canvas>
+    </section>
+
+    <section>
+      <h2>Flow Rates</h2>
+      <canvas id="flowRateChart"></canvas>
+    </section>
+
+    <section>
+      <h2>pH Levels</h2>
+      <canvas id="pHChart"></canvas>
+    </section>
+
+    <section>
+      <h2>Billing and Control</h2>
+      <div id="billing-info">
+        <p id="total-water"></p>
+        <p id="total-bill"></p>
+      </div>
+      <button id="toggle-valve">Toggle Valve</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Developed for IDP Presentation</p>
+  </footer>
 </body>
 </html>
